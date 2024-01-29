@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clinic_app/core/core/config/routes/app_router.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/login_page.dart';
-import 'package:clinic_app/modules/authorization/presentation/screens/profile_creation.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 // import 'package:clinic_app/core/core/config/app_consts.dart';
@@ -9,10 +8,22 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
-class SmsPage extends StatelessWidget {
-  const SmsPage({super.key});
+class SmsPage extends StatefulWidget {
+  const SmsPage({
+    super.key,
+    required this.code,
+  });
 
-  get controller => null;
+  final int code;
+
+  @override
+  State<SmsPage> createState() => _SmsPageState();
+}
+
+class _SmsPageState extends State<SmsPage> {
+  final TextEditingController controller = TextEditingController();
+
+  String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +93,9 @@ class SmsPage extends StatelessWidget {
                 // },
                 keyboardType: TextInputType.number,
                 //style: FontWeight(12), to set text style of entering text by user
-                decoration: const InputDecoration(
-                  prefix: Text('*'),
+                decoration: InputDecoration(
+                  errorText: errorText,
+                  prefix: const Text('*'),
                   fillColor: Colors.white,
                   filled: true,
                   hintText: '--- -- -- --',
@@ -98,8 +110,8 @@ class SmsPage extends StatelessWidget {
                   //),
                   // errorBorder: OutlineInputBorder(
                   //   borderSide: BorderSide(color: Colors.black),
-                  disabledBorder: UnderlineInputBorder(),
-                  enabledBorder: UnderlineInputBorder(
+                  disabledBorder: const UnderlineInputBorder(),
+                  enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 2),
                   ),
                 ),
@@ -108,9 +120,14 @@ class SmsPage extends StatelessWidget {
             const SizedBox(height: 150),
             TextButton(
               onPressed: () {
-                context.router.push(
-                  const ProfCreatRoute(),
-                );
+                if (controller.text == 'Код ${widget.code}') {
+                  context.router.push(
+                    const ProfCreatRoute(),
+                  );
+                } else {
+                  errorText = 'error';
+                  setState(() {});
+                }
               },
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(

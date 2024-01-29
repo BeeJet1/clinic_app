@@ -33,10 +33,20 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfCreatPage(),
       );
     },
-    SmsRoute.name: (routeData) {
+    ProfileRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SmsPage(),
+        child: const ProfileScreen(),
+      );
+    },
+    SmsRoute.name: (routeData) {
+      final args = routeData.argsAs<SmsRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SmsPage(
+          key: args.key,
+          code: args.code,
+        ),
       );
     },
     SplashRoute.name: (routeData) {
@@ -91,17 +101,54 @@ class ProfCreatRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [SmsPage]
-class SmsRoute extends PageRouteInfo<void> {
-  const SmsRoute({List<PageRouteInfo>? children})
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
       : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SmsPage]
+class SmsRoute extends PageRouteInfo<SmsRouteArgs> {
+  SmsRoute({
+    Key? key,
+    required int code,
+    List<PageRouteInfo>? children,
+  }) : super(
           SmsRoute.name,
+          args: SmsRouteArgs(
+            key: key,
+            code: code,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SmsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<SmsRouteArgs> page = PageInfo<SmsRouteArgs>(name);
+}
+
+class SmsRouteArgs {
+  const SmsRouteArgs({
+    this.key,
+    required this.code,
+  });
+
+  final Key? key;
+
+  final int code;
+
+  @override
+  String toString() {
+    return 'SmsRouteArgs{key: $key, code: $code}';
+  }
 }
 
 /// generated route for
