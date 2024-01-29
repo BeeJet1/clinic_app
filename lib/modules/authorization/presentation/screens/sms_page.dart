@@ -1,35 +1,35 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:clinic_app/core/core/config/app_consts.dart';
 import 'package:clinic_app/core/core/config/routes/app_router.dart';
+import 'package:clinic_app/modules/authorization/presentation/screens/login_page.dart';
+import 'package:clinic_app/modules/authorization/presentation/screens/profile_creation.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:clinic_app/core/core/config/app_consts.dart';
+// import 'package:clinic_app/core/core/config/routes/app_router.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SmsPage extends StatelessWidget {
+  const SmsPage({super.key});
 
   get controller => null;
 
   @override
   Widget build(BuildContext context) {
-    int code = 0;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon:
-              const ImageIcon(AssetImage('assets/images/close.png'), size: 24),
+          icon: const ImageIcon(AssetImage('assets/images/left.png'), size: 24),
           onPressed: () {
             context.router.push(
-              //push goes forward
-              const InfoRoute(),
+              const LoginPage() as PageRouteInfo,
             );
           },
         ),
         title: const Text(
-          'Вход',
+          'Подтверждение номера',
           style: TextStyle(
             fontSize: 17,
             fontFamily: 'SF Pro Display',
@@ -50,32 +50,31 @@ class LoginPage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(left: 10, right: 200, top: 20),
               child: Text(
-                'Войти',
-                textAlign: TextAlign.left,
+                'Введите код из смс',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 34,
+                    fontSize: 22,
                     fontFamily: 'SF Pro Display',
-                    fontWeight: FontWeight.w700),
+                    fontWeight: FontWeight.w500),
               ),
             ),
-            const SizedBox(height: 40),
-            const Padding(
-              padding: EdgeInsets.only(left: 10, right: 190, top: 20),
-              child: Text(
-                'Номер телефона',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
+            const SizedBox(height: 80),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 10, right: 190, top: 20),
+            //   child: Text(
+            //     'Номер телефона',
+            //     textAlign: TextAlign.left,
+            //     style: TextStyle(
+            //       fontSize: 15,
+            //       fontWeight: FontWeight.w400,
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 12),
             SizedBox(
               width: 310,
               child: TextField(
-                inputFormatters: [MaskTextInputFormatter(mask: '### ## ## ##')],
-                maxLength: 9,
+                inputFormatters: [MaskTextInputFormatter(mask: 'Код ####')],
                 focusNode: FocusNode(),
                 controller: controller,
                 // onChanged: (value) {
@@ -84,14 +83,12 @@ class LoginPage extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 //style: FontWeight(12), to set text style of entering text by user
                 decoration: const InputDecoration(
-                  prefix: Text('0'),
+                  prefix: Text('*'),
                   fillColor: Colors.white,
                   filled: true,
                   hintText: '--- -- -- --',
-                  helperText:
-                      'На указанный вами номер придет однократное СМС-сообщение с кодом подтверждения',
-                  helperMaxLines: 3,
-
+                  helperText: 'Получить код повторно',
+                  helperMaxLines: 1,
                   //focusedBorder: OutlineInputBorder(
                   // borderRadius: BorderRadius.all(
                   //   Radius.circular(
@@ -110,31 +107,11 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 150),
             TextButton(
-              // onPressed: () {
-              //   code = Random().nextInt(8999) + 1000;
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(
-              //       content: Text(code.toString()),
-              //     ),
-              //   );
-              //   context.router.push(
-              //     const LoginRoute(),
-              //   );
-              // final SharedPreferences prefs =
-              //       await SharedPreferences.getInstance();
-              // },
               onPressed: () {
                 context.router.push(
-                  const SmsRoute(),
+                  const ProfCreatRoute(),
                 );
-                // final SharedPreferences prefs =
-                //     await SharedPreferences.getInstance();
-                // await prefs.setBool(
-                //   AppConsts.isFirstEnter,
-                //   false,
-                // );
               },
-
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),

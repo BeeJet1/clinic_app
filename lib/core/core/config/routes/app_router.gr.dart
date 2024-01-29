@@ -27,6 +27,24 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    ProfCreatRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfCreatPage(),
+      );
+    },
+    SmsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SmsPage(),
+      );
+    },
+    SplashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreen(),
+      );
+    },
   };
 }
 
@@ -54,6 +72,48 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfCreatPage]
+class ProfCreatRoute extends PageRouteInfo<void> {
+  const ProfCreatRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfCreatRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfCreatRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SmsPage]
+class SmsRoute extends PageRouteInfo<void> {
+  const SmsRoute({List<PageRouteInfo>? children})
+      : super(
+          SmsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SmsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SplashScreen]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1,6 +1,8 @@
+import 'package:clinic_app/core/core/config/app_consts.dart';
 import 'package:clinic_app/core/core/config/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class InfoPage extends StatelessWidget {
@@ -51,7 +53,7 @@ class InfoPage extends StatelessWidget {
                     fontWeight: FontWeight.w500),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
@@ -66,7 +68,7 @@ class InfoPage extends StatelessWidget {
                       width: 32,
                       height: 32,
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     const Expanded(
                       child: Text(
                         'Записывайтесь на прием к самым лучшим специалистам',
@@ -81,7 +83,7 @@ class InfoPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
@@ -96,7 +98,7 @@ class InfoPage extends StatelessWidget {
                       width: 32,
                       height: 32,
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     const Expanded(
                       child: Text(
                         'Сохраняйте результаты ваших анализов, диагнозы и рекомендации от врачей в собственную библиотеку',
@@ -111,7 +113,7 @@ class InfoPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
@@ -126,7 +128,7 @@ class InfoPage extends StatelessWidget {
                       width: 32,
                       height: 32,
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     const Expanded(
                       child: Text(
                         'Просматривайте отзывы о врачах и дополняйте собственными комментариями',
@@ -141,7 +143,7 @@ class InfoPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
@@ -156,7 +158,7 @@ class InfoPage extends StatelessWidget {
                       width: 32,
                       height: 32,
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     const Expanded(
                       child: Text(
                         'Получайте уведомления о приеме или о поступивших сообщениях',
@@ -171,23 +173,29 @@ class InfoPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 context.router.push(
-                  //push goes forward
                   const LoginRoute(),
+                );
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                await prefs.setBool(
+                  AppConsts.isFirstEnter,
+                  false,
                 );
               },
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  side: BorderSide(
+                  borderRadius: BorderRadius.circular(8.0),
+                  side: const BorderSide(
                     color: Color(0xFF4A86CC),
                   ),
                 ),
                 backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 130),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 130),
               ),
               child: const Text(
                 'Войти',
