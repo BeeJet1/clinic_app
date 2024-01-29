@@ -1,19 +1,25 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:clinic_app/core/core/config/app_consts.dart';
 import 'package:clinic_app/core/core/config/routes/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
-  get controller => null;
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController controller = TextEditingController();
+  int code = 0;
   @override
   Widget build(BuildContext context) {
-    int code = 0;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -74,8 +80,13 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: 310,
               child: TextField(
-                inputFormatters: [MaskTextInputFormatter(mask: '### ## ## ##')],
-                maxLength: 9,
+                onChanged: (val) {},
+                inputFormatters: [
+                  MaskTextInputFormatter(
+                    mask: '### ## ## ##',
+                  ),
+                ],
+
                 focusNode: FocusNode(),
                 controller: controller,
                 // onChanged: (value) {
@@ -91,16 +102,6 @@ class LoginPage extends StatelessWidget {
                   helperText:
                       'На указанный вами номер придет однократное СМС-сообщение с кодом подтверждения',
                   helperMaxLines: 3,
-
-                  //focusedBorder: OutlineInputBorder(
-                  // borderRadius: BorderRadius.all(
-                  //   Radius.circular(
-                  //     25,
-                  //   ),
-                  // ),
-                  //),
-                  // errorBorder: OutlineInputBorder(
-                  //   borderSide: BorderSide(color: Colors.black),
                   disabledBorder: UnderlineInputBorder(),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.black, width: 2),
@@ -110,32 +111,29 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 150),
             TextButton(
-              // onPressed: () {
-              //   code = Random().nextInt(8999) + 1000;
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(
-              //       content: Text(code.toString()),
-              //     ),
-              //   );
-              //   context.router.push(
-              //     const LoginRoute(),
-              //   );
-              // final SharedPreferences prefs =
-              //       await SharedPreferences.getInstance();
-              // },
-              onPressed: () {
-                context.router.push(
-                  const SmsRoute(),
-                );
-                // final SharedPreferences prefs =
-                //     await SharedPreferences.getInstance();
-                // await prefs.setBool(
-                //   AppConsts.isFirstEnter,
-                //   false,
-                // );
-              },
+              onPressed: () async {
+                const storage = FlutterSecureStorage();
 
+                await storage.write(
+                    key: AppConsts.phone, value: controller.text);
+
+                code = Random().nextInt(8999) + 1000;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      code.toString(),
+                    ),
+                  ),
+                );
+
+                context.router.push(
+                  SmsRoute(
+                    code: code,
+                  ),
+                );
+              },
               style: TextButton.styleFrom(
+                disabledBackgroundColor: Colors.black38,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                   side: const BorderSide(

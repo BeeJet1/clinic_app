@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/info_page.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/login_page.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/profile_creation.dart';
+import 'package:clinic_app/modules/home_page/feature/profile_page/presentation/screens/profile_screen.dart';
 import 'package:clinic_app/modules/splash_screen.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/sms_page.dart';
+import 'package:flutter/material.dart';
 
 part 'app_router.gr.dart';
 
@@ -13,7 +15,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: InfoRoute.page,
-          initial: true,
+
           //this means that screen InfoPage is a main page of the App
         ),
         AutoRoute(
@@ -27,6 +29,10 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(
           page: ProfCreatRoute.page,
+        ),
+        AutoRoute(
+          page: ProfileRoute.page,
+          initial: true,
         ),
 
         /// routes go here

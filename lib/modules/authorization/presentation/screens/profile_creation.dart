@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clinic_app/core/core/config/app_consts.dart';
+import 'package:clinic_app/core/core/config/routes/app_router.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 // import 'package:clinic_app/core/core/config/app_consts.dart';
 // import 'package:clinic_app/core/core/config/routes/app_router.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
@@ -10,10 +12,10 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 class ProfCreatPage extends StatelessWidget {
   const ProfCreatPage({super.key});
 
-  get controller => null;
-
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controllerName = TextEditingController();
+    final TextEditingController controllerSureName = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -23,7 +25,7 @@ class ProfCreatPage extends StatelessWidget {
               const ImageIcon(AssetImage('assets/images/close.png'), size: 24),
           onPressed: () {
             context.router.push(
-              const LoginPage() as PageRouteInfo,
+              const LoginRoute(),
             );
           },
         ),
@@ -64,7 +66,7 @@ class ProfCreatPage extends StatelessWidget {
               child: TextField(
                 //inputFormatters: [MaskTextInputFormatter(mask: 'Код ####')],
                 focusNode: FocusNode(),
-                controller: controller,
+                controller: controllerName,
                 // onChanged: (value) {
                 //   print(value); //function for data validation
                 // },
@@ -98,7 +100,7 @@ class ProfCreatPage extends StatelessWidget {
               child: TextField(
                 //inputFormatters: [MaskTextInputFormatter(mask: 'Код ####')],
                 focusNode: FocusNode(),
-                controller: controller,
+                controller: controllerSureName,
                 // onChanged: (value) {
                 //   print(value); //function for data validation
                 // },
@@ -128,7 +130,14 @@ class ProfCreatPage extends StatelessWidget {
             ),
             SizedBox(height: 32),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                const storage = FlutterSecureStorage();
+                await storage.write(
+                    key: AppConsts.name, value: controllerName.text);
+                await storage.write(
+                    key: AppConsts.sureName, value: controllerSureName.text);
+                    
+              },
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),

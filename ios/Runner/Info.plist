@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string> Privacy - Photo Library Usage Description </string>
+	<key>NSCameraUsageDescription</key>
+	<string> Privacy - Photo Library Usage Description </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string> Privacy - Photo Library Usage Description </string>
 	<key>CFBundleDisplayName</key>
 	<string>Clinic App</string>
 	<key>CFBundleExecutable</key>
