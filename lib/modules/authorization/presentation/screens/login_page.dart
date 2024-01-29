@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:clinic_app/core/core/config/app_consts.dart';
 import 'package:clinic_app/core/core/config/routes/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,6 +16,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
     int code = 0;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -75,7 +79,7 @@ class LoginPage extends StatelessWidget {
               width: 310,
               child: TextField(
                 inputFormatters: [MaskTextInputFormatter(mask: '### ## ## ##')],
-                maxLength: 9,
+                //maxLength: 9,
                 focusNode: FocusNode(),
                 controller: controller,
                 // onChanged: (value) {
@@ -123,10 +127,20 @@ class LoginPage extends StatelessWidget {
               // final SharedPreferences prefs =
               //       await SharedPreferences.getInstance();
               // },
-              onPressed: () {
-                context.router.push(
-                  const SmsRoute(),
+              onPressed: () async {
+                const storage = FlutterSecureStorage();
+                await storage.write(
+                    key: AppConsts.phone, value: controller.text);
+                print('${await storage.read(key: AppConsts.phone)}');
+                code = Random().nextInt(8999) + 1000;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(code.toString()),
+                  ),
                 );
+                // context.router.push(
+                //   const SmsRoute(),
+                // );
                 // final SharedPreferences prefs =
                 //     await SharedPreferences.getInstance();
                 // await prefs.setBool(

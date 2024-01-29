@@ -24,7 +24,7 @@ class SmsPage extends StatelessWidget {
           icon: const ImageIcon(AssetImage('assets/images/left.png'), size: 24),
           onPressed: () {
             context.router.push(
-              const LoginPage() as PageRouteInfo,
+              const LoginRoute(),
             );
           },
         ),

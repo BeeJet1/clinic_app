@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:clinic_app/core/core/config/routes/app_router.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/login_page.dart';
+import 'package:clinic_app/modules/authorization/presentation/screens/sms_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 // import 'package:clinic_app/core/core/config/app_consts.dart';
