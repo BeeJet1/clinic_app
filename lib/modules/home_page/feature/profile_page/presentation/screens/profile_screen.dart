@@ -31,6 +31,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {});
   }
 
+  List<Widget> tabs = const [
+    Center(
+      child: Text("It's cloudy here"),
+    ),
+    Center(
+      child: Text("It's rainy here"),
+    ),
+    Center(
+      child: Text("It's sunny here"),
+    ),
+  ];
+
+  int currentIdex = 0;
   @override
   void initState() {
     getDataFromStorage();
@@ -117,11 +130,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Text('$name $sureName'),
             Text('$phone'),
+            DefaultTabController(
+              initialIndex: 0,
+              length: 3,
+              child: TabBar(
+                onTap: (value) {
+                  currentIdex = value;
+                  setState(() {});
+                },
+                tabs: const [
+                  Tab(
+                    child: Text('Анализы'),
+                  ),
+                  Tab(
+                    child: Text('Анализы'),
+                  ),
+                  Tab(
+                    child: Text('Анализы'),
+                  ),
+                ],
+              ),
+            ),
+            tabs[currentIdex],
           ],
         ),
       ),

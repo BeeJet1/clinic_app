@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/info_page.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/login_page.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/profile_creation.dart';
+import 'package:clinic_app/modules/home_page/bottom_bar_screen.dart';
+import 'package:clinic_app/modules/home_page/feature/doctors/presentation/screens/doctors_screen.dart';
 import 'package:clinic_app/modules/home_page/feature/profile_page/presentation/screens/profile_screen.dart';
 import 'package:clinic_app/modules/splash_screen.dart';
 import 'package:clinic_app/modules/authorization/presentation/screens/sms_page.dart';
@@ -28,6 +30,18 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ProfCreatRoute.page,
         ),
-        AutoRoute(page: ProfileRoute.page, initial: true),
+        AutoRoute(
+          page: BottomNavBarRoute.page,
+          initial: true,
+          children: [
+            AutoRoute(
+              page: ProfileRoute.page,
+            ),
+            AutoRoute(
+              page: DoctorsRoute.page,
+              initial: true,
+            ),
+          ],
+        )
       ];
 }

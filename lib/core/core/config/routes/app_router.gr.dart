@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BottomNavBarRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BottomNavBarScreen(),
+      );
+    },
+    DoctorsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorsScreen(),
+      );
+    },
     InfoRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -56,6 +68,34 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [BottomNavBarScreen]
+class BottomNavBarRoute extends PageRouteInfo<void> {
+  const BottomNavBarRoute({List<PageRouteInfo>? children})
+      : super(
+          BottomNavBarRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BottomNavBarRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DoctorsScreen]
+class DoctorsRoute extends PageRouteInfo<void> {
+  const DoctorsRoute({List<PageRouteInfo>? children})
+      : super(
+          DoctorsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
