@@ -32,10 +32,11 @@ class _SmsPageState extends State<SmsPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const ImageIcon(AssetImage('assets/images/left.png'), size: 24),
+          icon: const ImageIcon(AssetImage('assets/images/left.png'),
+              size: 24, color: Colors.blue),
           onPressed: () {
             context.router.push(
-              const LoginPage() as PageRouteInfo,
+              const LoginRoute(),
             );
           },
         ),
@@ -59,7 +60,7 @@ class _SmsPageState extends State<SmsPage> {
         child: SafeArea(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             const Padding(
-              padding: EdgeInsets.only(left: 10, right: 200, top: 20),
+              padding: EdgeInsets.only(left: 100, right: 100, top: 20),
               child: Text(
                 'Введите код из смс',
                 textAlign: TextAlign.center,

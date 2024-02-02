@@ -15,8 +15,6 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: InfoRoute.page,
-
-          //this means that screen InfoPage is a main page of the App
         ),
         AutoRoute(
           page: LoginRoute.page,
@@ -30,11 +28,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ProfCreatRoute.page,
         ),
-        AutoRoute(
-          page: ProfileRoute.page,
-          initial: true,
-        ),
-
-        /// routes go here
+        AutoRoute(page: ProfileRoute.page, initial: true),
       ];
 }

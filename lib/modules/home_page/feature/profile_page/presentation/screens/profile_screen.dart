@@ -40,44 +40,85 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Мой профиль',
+          style: TextStyle(
+            fontSize: 34,
+            fontFamily: 'SF Pro Display',
+            fontWeight: FontWeight.w700,
+          ),
+          textAlign: TextAlign.start,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              size: 24,
+              color: Colors.black,
+            ),
+            onPressed: () {},
+          ),
+        ],
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Divider(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.blue,
-                  child: image != null
-                      ? Image.file(image!)
-                      : Text('${name?[0]} ${sureName?[0]}'),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: CircleAvatar(
-                    radius: 16,
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () async {
-                        final ImagePicker imagePicker = ImagePicker();
-                        final pickedImage = await imagePicker.pickImage(
-                          source: ImageSource.gallery,
-                        );
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.blue,
+                    child: image != null
+                        ? ClipOval(
+                            child: Image.file(
+                              image!,
+                              fit: BoxFit.cover,
+                              width: 100,
+                              height: 100,
+                            ),
+                          )
+                        : Text('${name?[0]} ${sureName?[0]}'),
+                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: CircleAvatar(
+                      radius: 16,
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: () async {
+                          final ImagePicker imagePicker = ImagePicker();
+                          final pickedImage = await imagePicker.pickImage(
+                            source: ImageSource.gallery,
+                          );
 
-                        try {
-                          image = File(pickedImage!.path);
-                          setState(() {});
-                        } catch (e) {}
-                      },
-                      icon: const Icon(
-                        Icons.camera,
+                          try {
+                            image = File(pickedImage!.path);
+                            setState(() {});
+                          } catch (e) {}
+                        },
+                        icon: const Icon(
+                          Icons.camera,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 16,
             ),
             Text('$name $sureName'),
             Text('$phone'),

@@ -49,17 +49,17 @@ class ProfCreatPage extends StatelessWidget {
         child: SafeArea(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             const SizedBox(height: 34),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 10, right: 190, top: 20),
-            //   child: Text(
-            //     'Номер телефона',
-            //     textAlign: TextAlign.left,
-            //     style: TextStyle(
-            //       fontSize: 15,
-            //       fontWeight: FontWeight.w400,
-            //     ),
-            //   ),
-            // ),
+            const Padding(
+              padding: EdgeInsets.only(left: 5, right: 280, top: 20),
+              child: Text(
+                'Имя',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
             const SizedBox(height: 12),
             SizedBox(
               width: 310,
@@ -95,6 +95,17 @@ class ProfCreatPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
+            const Padding(
+              padding: EdgeInsets.only(left: 5, right: 250, top: 20),
+              child: Text(
+                'Фамилия',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
             SizedBox(
               width: 310,
               child: TextField(
@@ -136,7 +147,15 @@ class ProfCreatPage extends StatelessWidget {
                     key: AppConsts.name, value: controllerName.text);
                 await storage.write(
                     key: AppConsts.sureName, value: controllerSureName.text);
-                    
+                context.router.push(
+                  ProfileRoute(),
+                );
+                //       Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => ProfileRoute(),
+                //   ),
+                // );
               },
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(
